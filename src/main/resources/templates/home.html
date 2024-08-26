@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
 <body>
-    <section>
-        <h1>this is home</h1>
+    <section class="banner">
+        <div class="desc">
+            <h1 class="h1">Contact Manager</h1>
+            <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, laboriosam est animi reiciendis ad enim sequi </h4>
+            <button class="btn bg-color-primary btn-lg mt-3 text-white">Get Started</button>
+        </div>
     </section>
 </body>
 </html>
