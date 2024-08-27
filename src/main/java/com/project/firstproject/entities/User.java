@@ -12,6 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Users")
@@ -20,15 +23,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank(message="name field is must")
     private String name;
+    @NotBlank(message="email field is must")
+    @Email(regexp=" ^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" ,message="Please enter valid email")
     @Column(unique=true)
     private String email;
+    @NotBlank(message="password field is must")
+    @Size(min=6, message="Password must be minimum 6 character long")
     private String password;
     private String role;
     private boolean enabled;
     private String image;
     @Column(length=300)
-    private String about;
+    @NotBlank(message="description field is must")
+    private String description;
 
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
     private List<Contact> contactList = new ArrayList<>();
@@ -86,11 +95,18 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
-    public String getAbout() {
-        return about;
+    public String getDescription() {
+        return description;
     }
-    public void setAbout(String about) {
-        this.about = about;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+                + ", enabled=" + enabled + ", image=" + image + ", about=" + description + ", contactList=" + contactList
+                + "]";
     }
   
 }
